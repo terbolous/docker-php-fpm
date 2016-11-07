@@ -26,8 +26,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     && sed -i "s|user = nobody|user = nobody|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|group = nobody|group = nobody|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|;clear_env = .*|clear_env = no|i" /etc/php7/php-fpm.d/www.conf \
-    && sed -i "s|pm.start_servers = .*|pm.start_servers = 1|i" /etc/php7/php-fpm.d/www.conf \
-    && sed -i "s|pm.max_spare_servers = .*|pm.max_spare_servers = 2|i" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|pm.start_servers = .*|pm.start_servers = 2|i" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|pm.max_spare_servers = .*|pm.max_spare_servers = 5|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|listen = .*|listen = [::]:9000|i" /etc/php7/php-fpm.d/www.conf  \
 
     && mkdir /app \
