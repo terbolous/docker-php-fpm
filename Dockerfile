@@ -3,6 +3,7 @@ MAINTAINER Erik Weber <erik@vangenplotz.no>
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk add --update \
+        php7 \
         php7-opcache \
         php7-ctype \
         php7-curl \
