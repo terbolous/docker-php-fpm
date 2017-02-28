@@ -2,7 +2,8 @@ FROM alpine:edge
 MAINTAINER Erik Weber <erik@vangenplotz.no>
 
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk add --update \
+    && apk --no-cache upgrade \
+    && apk add --no-cache \
         php7 \
         php7-ctype \
         php7-curl \
