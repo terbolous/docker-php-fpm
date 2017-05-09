@@ -1,8 +1,8 @@
-FROM alpine:edge
+FROM alpine:3.5
 MAINTAINER Erik Weber <erik@vangenplotz.no>
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
-    && apk add --update \
+# echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+RUN apk add --update \
         php7 \
         php7-phar \
         php7-zlib \
@@ -18,7 +18,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
         php7-openssl \
         php7-pdo \
         php7-pdo_mysql \
-        php7-redis \
+        #php7-redis \
 
     && sed -i "s|;*date.timezone =.*|date.timezone = Europe/Oslo|i" /etc/php7/php.ini \
     && sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = 50M|i" /etc/php7/php.ini \
@@ -30,6 +30,8 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     && sed -i "s|user = nobody|user = nobody|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|group = nobody|group = nobody|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|;clear_env = .*|clear_env = no|i" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|pm = dynamic|pm = ondemand|i" /etc/php7/php-fpm.d/www.conf \
+    && sed -i "s|;pm.process_idle_timeout = 10s.*|pm.process_idle_timeout = 60s|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|pm.start_servers = .*|pm.start_servers = 2|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|pm.max_spare_servers = .*|pm.max_spare_servers = 5|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|listen = .*|listen = [::]:9000|i" /etc/php7/php-fpm.d/www.conf  \
@@ -43,7 +45,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
     && chown -R nobody:nobody /app \
     && rm -rf /var/cache/apk*
 
-VOLUME /app
+#VOLUME /app
 WORKDIR /app
 EXPOSE 9000
 
