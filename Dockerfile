@@ -21,7 +21,7 @@ RUN apk --no-cache upgrade \
         php7-pdo \
         php7-pdo_mysql \
         php7-phar \
-        #php7-redis \
+        php7-redis \
         php7-zip \
         php7-zlib \
     && sed -i "s|;*date.timezone =.*|date.timezone = Europe/Oslo|i" /etc/php7/php.ini \
