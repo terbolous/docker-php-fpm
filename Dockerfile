@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.7
 MAINTAINER Erik Weber <erik@vangenplotz.no>
 
 # echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
@@ -24,7 +24,6 @@ RUN apk --no-cache upgrade \
         #php7-redis \
         php7-zip \
         php7-zlib \
-
     && sed -i "s|;*date.timezone =.*|date.timezone = Europe/Oslo|i" /etc/php7/php.ini \
     && sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = 50M|i" /etc/php7/php.ini \
     && sed -i "s|;*max_file_uploads =.*|max_file_uploads = 200|i" /etc/php7/php.ini \
@@ -40,12 +39,10 @@ RUN apk --no-cache upgrade \
     && sed -i "s|pm.start_servers = .*|pm.start_servers = 2|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|pm.max_spare_servers = .*|pm.max_spare_servers = 5|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|listen = .*|listen = [::]:9000|i" /etc/php7/php-fpm.d/www.conf  \
-    && ln -s /usr/bin/php7 /usr/bin/php \
     && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && php composer-setup.php \
     && rm composer-setup.php \
     && mv composer.phar /usr/bin/composer \
-    
     && mkdir /app \
     && chown -R nobody:nobody /app \
     && rm -rf /var/cache/apk*
