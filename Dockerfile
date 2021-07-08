@@ -30,7 +30,7 @@ RUN apk --no-cache upgrade \
     && sed -i "s|;*max_file_uploads =.*|max_file_uploads = 200|i" /etc/php7/php.ini \
     && sed -i "s|;*post_max_size =.*|post_max_size = 100M|i" /etc/php7/php.ini \
     && sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= 0|i" /etc/php7/php.ini \
-    && sed -i "s|error_log = .*|error_log = /proc/self/fd/2|i" /etc/php7/php-fpm.conf \
+    && sed -i "s|;error_log = .*|error_log = /proc/self/fd/2|i" /etc/php7/php-fpm.conf \
     && sed -i "s|;catch_workers_output = .*|catch_workers_output = yes|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|user = nobody|user = nobody|i" /etc/php7/php-fpm.d/www.conf \
     && sed -i "s|group = nobody|group = nobody|i" /etc/php7/php-fpm.d/www.conf \
